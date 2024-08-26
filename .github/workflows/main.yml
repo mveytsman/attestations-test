@@ -1,0 +1,11 @@
+on:
+  repository_dispatch
+  
+jobs:
+  verify_and_codesign:
+    runs-on: ubuntu-latest
+    env:
+      S3_BUCKET: "mveytsman-test"
+      MESSAGE: ${{ github.event.client_payload.path }}
+    steps:
+        - run: echo $MESSAGE
