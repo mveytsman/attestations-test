@@ -20,6 +20,10 @@ See [cosign.yml](https://github.com/mveytsman/attestations-test/blob/main/.githu
 3) Use `cosign` to generate an attestation for `checksums.txt` as `checksums.bundle`
 4) Upload `checksums.bundle` to S3 at `s3://mveytsman-test/${VERSION}/checksums.txt.bundle
 
+### Artifacts
+- [Signature on Rektor](https://search.sigstore.dev/?logIndex=125181272)
+
+
 ### Usage
 The user will verify the checksums.txt with
 ```bash
@@ -45,6 +49,10 @@ See [gh.yml](https://github.com/mveytsman/attestations-test/blob/main/.github/wo
 1) Download `s3://mveytsman-test/${VERSION}/checksums.txt` and `s3://mveytsman-test/checksums.txt.sig`
 2) Verify that the signature is valid for `checksums.txt`
 3) Use github's attestation action to generate an attestation for `checksums.txt` as `checksums.bundle`
+
+### Artifacts:
+- [Attestation on GitHub](https://github.com/mveytsman/attestations-test/attestations/1822949)
+- [Signature on Rektor](https://search.sigstore.dev/?logIndex=125181270)
 
 ### Usage
 The user will verify the checksums.txt with
