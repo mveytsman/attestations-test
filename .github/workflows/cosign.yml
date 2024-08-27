@@ -35,5 +35,7 @@ jobs:
 
         - name: Generate cosign bundle
           run: cosign sign-blob checksums.txt --yes --bundle checksums.txt.bundle
-            
+
+        - name: Upload bundle
+          run: aws s3 cp checksums.txt.bundle s3://${S3_BUCKET}/${VERSION}/checksums.txt.bundle
            
