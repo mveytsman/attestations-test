@@ -10,7 +10,7 @@ curl -L -X POST \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/mveytsman/attestations-test/dispatches \
   -d '{"event_type":"attestation","client_payload": {"version": "1.2.3"}}'
-
+```
 ## Option 1: Using Cosign
 
 See [cosign.yml](https://github.com/mveytsman/attestations-test/blob/main/.github/workflows/cosign.yml)
