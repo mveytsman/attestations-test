@@ -30,6 +30,9 @@ jobs:
        #   uses: actions/attest-build-provenance@v1
         #  with:
          #   subject-path: 'checksums.txt'
+        - name: Install Cosign
+          uses: sigstore/cosign-installer@v3.6.0
+
         - name: Generate cosign bundle
           run: cosign sign-blob checksums.txt --bundle checksums.txt.bundle
             
