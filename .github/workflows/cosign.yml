@@ -15,7 +15,10 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: 'us-east-1'
-    steps:
+    steps:          
+        - name: Install Cosign
+          uses: sigstore/cosign-installer@v3.6.0
+
         - name: Download checksums
           run: |
             aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt .
@@ -26,12 +29,6 @@ jobs:
                --signing-algorithm ECDSA_SHA_512
                --message fileb://checksums.txt
                --signature fileb://checksums.txt.sig
-      #  - name: Generate artifact attestation
-       #   uses: actions/attest-build-provenance@v1
-        #  with:
-         #   subject-path: 'checksums.txt'
-        - name: Install Cosign
-          uses: sigstore/cosign-installer@v3.6.0
 
         - name: Generate cosign bundle
           run: cosign sign-blob checksums.txt --yes --bundle checksums.txt.bundle
