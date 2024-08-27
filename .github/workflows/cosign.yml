@@ -34,6 +34,6 @@ jobs:
           uses: sigstore/cosign-installer@v3.6.0
 
         - name: Generate cosign bundle
-          run: cosign sign-blob checksums.txt --bundle checksums.txt.bundle
+          run: cosign sign-blob checksums.txt --yes --bundle checksums.txt.bundle
             
            
