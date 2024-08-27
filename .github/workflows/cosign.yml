@@ -1,0 +1,32 @@
+on:
+  repository_dispatch
+
+permissions:
+  id-token: write
+  contents: read
+  attestations: write
+  
+jobs:
+  verify_and_codesign:
+    runs-on: ubuntu-latest
+    env:
+      S3_BUCKET: "mveytsman-test"
+      VERSION: ${{ github.event.client_payload.version }}
+    steps:
+        - name: Download checksums
+          run: |
+            aws cp s3://${S3_BUCKET}/${VERSION}/checksums.txt .
+            aws cp s3://${S3_BUCKET}/${VERSION}/checksums.txt.sig .
+        - name: Verify checksums
+          run: aws kms verify --key-id alias/build-artifact-signing-key \
+               --message-type RAW \
+               --signing-algorithm ECDSA_SHA_512 \
+               --message fileb://checksums.txt \
+               --signature fileb://checksums.txt.sig
+        - name: Generate artifact attestation
+          uses: actions/attest-build-provenance@v1
+          with:
+            subject-path: 'checksums.txt'
+
+            
+           
