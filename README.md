@@ -30,7 +30,7 @@ The user will verify the checksums.txt with
 cosign verify-blob checksums.txt  \
  --bundle checksums.txt.bundle \
  --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
- --certificate-identity "https://github.com/mveytsman/cosign-test/.github/workflows/cosign.yml@refs/heads/main"
+ --certificate-identity "https://github.com/mveytsman/attestations-test/.github/workflows/cosign.yml@refs/heads/main"
 ```
 
 They will then verify the artifacts match the checksums
