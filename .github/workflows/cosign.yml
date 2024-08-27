@@ -22,10 +22,10 @@ jobs:
             aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt . --region eu-west-1
             aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt.sig . --region eu-west-1
         - name: Verify checksums
-          run: aws kms verify --key-id alias/build-artifact-signing-key \
-               --message-type RAW \
-               --signing-algorithm ECDSA_SHA_512 \
-               --message fileb://checksums.txt \
+          run: aws kms verify --key-id alias/build-artifact-signing-key
+               --message-type RAW
+               --signing-algorithm ECDSA_SHA_512
+               --message fileb://checksums.txt
                --signature fileb://checksums.txt.sig
         - name: Generate artifact attestation
           uses: actions/attest-build-provenance@v1
