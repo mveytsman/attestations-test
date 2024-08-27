@@ -18,6 +18,7 @@ jobs:
     steps:
         - name: Download checksums
           run: |
+            echo $AWS_ACCESS_KEY_ID
             aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt . --region eu-west-1
             aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt.sig . --region eu-west-1
         - name: Verify checksums
