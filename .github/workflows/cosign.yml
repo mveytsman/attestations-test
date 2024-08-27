@@ -15,8 +15,8 @@ jobs:
     steps:
         - name: Download checksums
           run: |
-            aws cp s3 s3://${S3_BUCKET}/${VERSION}/checksums.txt .
-            aws cp s3 s3://${S3_BUCKET}/${VERSION}/checksums.txt.sig .
+            aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt .
+            aws s3 cp s3://${S3_BUCKET}/${VERSION}/checksums.txt.sig .
         - name: Verify checksums
           run: aws kms verify --key-id alias/build-artifact-signing-key \
                --message-type RAW \
